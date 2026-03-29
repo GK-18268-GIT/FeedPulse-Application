@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import { ENV } from './config/env.js';
 import { connectDB } from './lib/db.js';
+import authRoutes from './routes/auth.routes.js';
 
 const PORT = ENV.PORT || 5000;
 
@@ -14,6 +15,8 @@ app.use(cors({
 }));
 
 app.use(express.json());
+
+app.use('/api/auth', authRoutes);
 
 const startServer = async() => {
     try {

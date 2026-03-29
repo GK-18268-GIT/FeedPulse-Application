@@ -5,7 +5,7 @@ export interface IFeedback extends Document {
     title: string;
     description: string;
     category: 'Bug' | 'Feature Request' | 'Improvement' | 'Other';
-    status: 'New' | 'In Review'| 'Resolve';
+    status: 'New' | 'In Review'| 'Resolved';
     submitterName?: string;
     submitterEmail?: string;
 
@@ -14,7 +14,7 @@ export interface IFeedback extends Document {
     ai_sentiment?: string;  
     ai_priority?:  number;  
     ai_summary?: string; 
-    ai_tags?: string;
+    ai_tags?: string[];
     ai_processed?: boolean;
 }
 
@@ -25,7 +25,7 @@ const FeedbackSchema = new Schema<IFeedback>({
     },
 
     description: {
-        type: String, required: true, maxLength: 100
+        type: String, required: true, minLength: 10, maxLength: 1000
     },
 
     category: {
@@ -33,7 +33,7 @@ const FeedbackSchema = new Schema<IFeedback>({
     },
 
     status: {
-        type: String, enum: ['New', 'In Review', 'Resolve'], default: 'New'
+        type: String, enum: ['New', 'In Review', 'Resolved'], default: 'New'
     },
 
     submitterName: {
