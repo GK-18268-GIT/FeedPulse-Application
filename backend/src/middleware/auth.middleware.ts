@@ -2,8 +2,6 @@ import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { ENV } from '../config/env.js';
 
-const JWT_SECRET_KEY = ENV.JWT_SECRET_KEY;
-
 export interface IauthRequest extends Request{
     user?: {
         sub: string,
@@ -14,7 +12,7 @@ export interface IauthRequest extends Request{
 export function authMiddleware(req: IauthRequest, res: Response, next: NextFunction) {
     const authHeader = req.headers['authorization'];
 
-    if(!authHeader?.startsWith('Bearer')) {
+    if(!authHeader?.startsWith('Bearer ')) {
         return res.status(401).json({
             message: "Authorization header missing"
         });

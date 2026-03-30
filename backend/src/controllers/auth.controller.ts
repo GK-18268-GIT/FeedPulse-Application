@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { ENV } from '../config/env.js';
 
 export async function login(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { email, password } = req.body || {};
 
     if (!email || !password) {
         return res.status(400).json({
