@@ -4,7 +4,7 @@ import { useState} from 'react';
 
 export default function Home() {
   const [form, setForm] = useState({title: '', description: '', category: 'Bug', submitterName: '', submitterEmail: ''});
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<'idle' | 'success' | 'error' | 'ratelimit'>('idle');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const router = useRouter();
 
@@ -27,6 +27,11 @@ export default function Home() {
         body: JSON.stringify(form),
       });
 
+      if(res.status === 429) {
+        setStatus('ratelimit');
+        return;
+      }
+
       if (!res.ok) throw new Error('Failed to submit feedback');
       setStatus('success');
       setForm({ title: '', description: '', category: 'Bug', submitterName: '', submitterEmail: '' });
@@ -46,6 +51,7 @@ export default function Home() {
       
       {status === 'success' && <div className='bg-green-100 text-green-700 p-3 rounded mb-4'>Thank you! Feedback submitted</div>}
       {status === 'error' && <div className='bg-red-100 text-red-700 p-3 rounded mb-4'>Something went wrong. Try again</div>}
+      {status === 'ratelimit' && <div className='bg-yellow-100 text-yellow-700 p-3 rounded mb-4'>Too many submissions. Please wait an hour before trying again.</div>}
       
       <form onSubmit = {handleSubmit} className='space-y-4'>
         <div>
