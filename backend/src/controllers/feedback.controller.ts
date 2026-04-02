@@ -18,6 +18,8 @@ export async function createFeedback(req: Request, res: Response) {
         const feedback = await Feedback.create({ title, description, category, status, submitterName, submitterEmail });
 
         // AI analyze with Gemini
+        // After creating the feedback
+    if (process.env.NODE_ENV !== 'test') {
         analyzeFeedbackWithGemini(title, description)
             .then(async (geminiAI) => {
                 await Feedback.findByIdAndUpdate(feedback._id, {
@@ -30,6 +32,7 @@ export async function createFeedback(req: Request, res: Response) {
                 });
             })
             .catch(err => console.error('Gemini analysis failed:', err));
+    }
 
         res.status(201).json({
             success: true,
