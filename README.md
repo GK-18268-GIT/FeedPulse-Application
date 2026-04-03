@@ -111,7 +111,6 @@ FeedPulse-Application/
 
 ## API EndPoints
 
-|--------|--------------------|-----------------------|
 | Method | EndPoint           |   Description         |
 |--------|--------------------|-----------------------|
 |POST    | `/api/auth/login`  |Admin login            |
@@ -120,7 +119,6 @@ FeedPulse-Application/
 |GET     | `/api/feedback/:id`|Get Feedback By Id     |
 |PATCH   | `/api/feedback/:id`|Update Feedback Status |
 |DELETE  | `/api/feedback/:id`|Delete Feedback        |
-|--------|--------------------|-----------------------|
 
 ---
 
@@ -184,14 +182,12 @@ Frontend runs at: `http://localhost:3000`
 
 ### 4. Access the app
 
-|-----------------|---------------------------------|
 | Page            |             URL                 |
 |-----------------|---------------------------------|
 | Home            | http://localhost:3000           |
 | Feedback Form   | http://localhost:3000/feedback  |
 | Admin Login     | http://localhost:3000/admin     |
 | Admin Dashboard | http://localhost:3000/dashboard |
-|-----------------|---------------------------------|
 
 Admin credentials:
 ```
@@ -205,7 +201,6 @@ Password: admin123
 
 ### Backend (`backend/.env`)
 
-|------------------|-----------------------------|
 | Variable         |         Description         | 
 |------------------|-----------------------------|
 | `PORT`           | Port for the backend server | 
@@ -215,15 +210,12 @@ Password: admin123
 | `JWT_SECRET_KEY` | Secret key for JWT tokens   |
 | `ADMIN_EMAIL`    | Admin login email           |
 | `ADMIN_PASSWORD` | Admin login password        |
-|------------------|-----------------------------|
 
 ### Frontend (`frontend/.env.local`)
 
-|-----------------------|-----------------|
 |       Variable        | Description     |
 |-----------------------|-----------------|
 | `NEXT_PUBLIC_API_URL` | Backend API URL |
-|-----------------------|-----------------|
 
 ---
 
